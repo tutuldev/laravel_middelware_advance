@@ -16,12 +16,13 @@ class ValidUser //name change here
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$roles): Response
+    public function handle(Request $request, Closure $next,  ...$roles): Response
     {
         $user = Auth::user();
 
         echo "<h3 class='text-primary'>We are now in ValidUser Middleware.</h3>";
         echo "<h3 class='text-primary'>".$user->role."</h3>";
+        // echo "<h3 class='text-primary'>".$role."</h3>";
 
         // for singel
         // if(Auth::check() && Auth::user()->role == $role){
@@ -31,14 +32,33 @@ class ValidUser //name change here
         //     return redirect()->route('login');
         // }
 
-    //   for multiple 
-        if ($user && in_array($user->role, $roles)) {
+    //   for multiple role
+    //     if ($user && in_array($user->role, $roles)) {
 
-            return $next($request); // Allow request to proceed
-        }
-        // return redirect()->route('login');
-        return redirect()->route('login')->with('error', 'Access Denied');
+    //         return $next($request); // Allow request to proceed
+    //     }
+    //     // return redirect()->route('login');
+    //     return redirect()->route('login')->with('error', 'Access Denied');
+    // }
+
+    // for laravel own middleware for 11 not 10
+
+    // if esleif
+    // if (Auth:: user()->role == $role) {
+    //     return $next($request);
+    //     }elseif (Auth:: user()->role == "reader") {
+    //     return redirect()->route('user');
+    //     }else{
+    //     return redirect()->route('login');
+    //     }
+    
+    if (in_array($user->role, $roles)) {
+
+        return $next($request); // Allow request to proceed
     }
+    // return redirect()->route('login');
+    return redirect()->route('login')->with('error', 'Access Denied');
+}
 
 
 // after complete the request then its run

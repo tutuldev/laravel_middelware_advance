@@ -85,10 +85,22 @@ Route::get('logout',[UserController::class,'logout'])->name('logout');
 // Route::get('dashboard/inner',[UserController::class,'innerPage'])
 // ->name('inner')->middleware(['isuservalid:admin,reader',TestUser::class]);
 
+// condiction middleware
+// Route::get('dashboard', [UserController::class, 'dashboardPage'])
+//     ->name('dashboard')
+//     ->middleware('isuservalid:admin,reader');
+
+// Route::get('dashboard/inner', [UserController::class, 'innerPage'])
+//     ->name('inner')
+//     ->middleware(['isuservalid:admin',TestUser::class]);
+
+
+// using laravel inbuild middleware
+
 Route::get('dashboard', [UserController::class, 'dashboardPage'])
     ->name('dashboard')
-    ->middleware('isuservalid:admin,reader');
+    ->middleware(['auth','isuservalid:admin,reader']);
 
 Route::get('dashboard/inner', [UserController::class, 'innerPage'])
     ->name('inner')
-    ->middleware(['isuservalid:admin',TestUser::class]);
+    ->middleware(['auth','isuservalid:admin']);
