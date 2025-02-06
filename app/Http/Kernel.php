@@ -64,5 +64,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        // পুরোনো alias: 'validuser' => \App\Http\Middleware\ValidUser::class,
+        'isuservalid' => \App\Http\Middleware\IsUserValid::class, // নতুন alias
     ];
 }
