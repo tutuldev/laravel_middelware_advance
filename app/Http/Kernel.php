@@ -66,6 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // পুরোনো alias: 'validuser' => \App\Http\Middleware\ValidUser::class,
-        'isuservalid' => \App\Http\Middleware\IsUserValid::class, // নতুন alias
+        'isuservalid' => \App\Http\Middleware\ValidUser::class, // নতুন alias
     ];
 }

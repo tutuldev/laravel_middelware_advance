@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class IsUserValid //name change here 
+class ValidUser //name change here
 
 {
     /**
