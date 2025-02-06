@@ -43,6 +43,13 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        // make group middleware
+
+         //  new Middleware Group make
+        'new-group' => [
+        \App\Http\Middleware\ValidUser::class,  // Custom Middleware
+        \App\Http\Middleware\TestUser::class,   // Custom Middleware
+    ],
     ];
 
     /**
