@@ -21,7 +21,7 @@ class ValidUser //name change here
         $user = Auth::user();
 
         echo "<h3 class='text-primary'>We are now in ValidUser Middleware.</h3>";
-        echo "<h3 class='text-primary'>".$user->role."</h3>";
+        // echo "<h3 class='text-primary'>".$user->role."</h3>";
         // echo "<h3 class='text-primary'>".$role."</h3>";
 
         // for singel
@@ -33,13 +33,13 @@ class ValidUser //name change here
         // }
 
     //   for multiple role
-    //     if ($user && in_array($user->role, $roles)) {
+        if ($user && in_array($user->role, $roles)) {
 
-    //         return $next($request); // Allow request to proceed
-    //     }
-    //     // return redirect()->route('login');
-    //     return redirect()->route('login')->with('error', 'Access Denied');
-    // }
+            return $next($request); // Allow request to proceed
+        }
+        // return redirect()->route('login');
+        return redirect()->route('login')->with('error', 'Access Denied');
+    }
 
     // for laravel own middleware for 11 not 10
 
@@ -51,14 +51,14 @@ class ValidUser //name change here
     //     }else{
     //     return redirect()->route('login');
     //     }
-    
-    if (in_array($user->role, $roles)) {
 
-        return $next($request); // Allow request to proceed
-    }
-    // return redirect()->route('login');
-    return redirect()->route('login')->with('error', 'Access Denied');
-}
+//     if (in_array($user->role, $roles)) {
+
+//         return $next($request); // Allow request to proceed
+//     }
+//     // return redirect()->route('login');
+//     return redirect()->route('login')->with('error', 'Access Denied');
+// }
 
 
 // after complete the request then its run

@@ -97,10 +97,17 @@ Route::get('logout',[UserController::class,'logout'])->name('logout');
 
 // using laravel inbuild middleware
 
+// Route::get('dashboard', [UserController::class, 'dashboardPage'])
+//     ->name('dashboard')
+//     ->middleware(['auth','isuservalid:admin,reader']);
+
+// Route::get('dashboard/inner', [UserController::class, 'innerPage'])
+//     ->name('inner')
+//     ->middleware(['auth','isuservalid:admin']);
+
+// using global middelware
 Route::get('dashboard', [UserController::class, 'dashboardPage'])
-    ->name('dashboard')
-    ->middleware(['auth','isuservalid:admin,reader']);
+    ->name('dashboard');
 
 Route::get('dashboard/inner', [UserController::class, 'innerPage'])
-    ->name('inner')
-    ->middleware(['auth','isuservalid:admin']);
+    ->name('inner');
