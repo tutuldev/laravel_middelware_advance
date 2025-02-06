@@ -31,18 +31,10 @@ class UserController extends Controller
         }
     }
     public function dashboardPage(){
-        if(Auth::check()){
             return view('dashbord');
-        }else{
-            return redirect()->route('login');
-        }
     }
     public function innerPage(){
-        if(Auth::check()){
             return view('inner');
-        }else{
-            return redirect()->route('login');
-        }
     }
     public function logout(){
       Auth::logout();
