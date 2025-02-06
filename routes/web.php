@@ -59,10 +59,36 @@ Route::get('logout',[UserController::class,'logout'])->name('logout');
 
 // group middleware
 
-Route::middleware(['new-group'])->group(function(){
-    Route::get('dashboard',[UserController::class,'dashboardPage'])
-   ->name('dashboard');
+// Route::middleware(['new-group'])->group(function(){
+//     Route::get('dashboard',[UserController::class,'dashboardPage'])
+//    ->name('dashboard');
 
-   Route::get('dashboard/inner',[UserController::class,'innerPage'])
-   ->name('inner')->withoutMiddleware([TestUser::class]);
-   });
+//    Route::get('dashboard/inner',[UserController::class,'innerPage'])
+//    ->name('inner')->withoutMiddleware([TestUser::class]);
+//    });
+
+// condictional middleware
+// login and role:reader
+
+// Route::get('dashboard',[UserController::class,'dashboardPage'])
+// ->name('dashboard')->middleware(['isuservalid:reader',TestUser::class]);
+
+// Route::get('dashboard/inner',[UserController::class,'innerPage'])
+// ->name('inner')->middleware(['isuservalid:reader',TestUser::class]);
+
+
+// reader and admin also access
+
+// Route::get('dashboard',[UserController::class,'dashboardPage'])
+// ->name('dashboard')->middleware(['isuservalid:admin,reader',TestUser::class]);
+
+// Route::get('dashboard/inner',[UserController::class,'innerPage'])
+// ->name('inner')->middleware(['isuservalid:admin,reader',TestUser::class]);
+
+Route::get('dashboard', [UserController::class, 'dashboardPage'])
+    ->name('dashboard')
+    ->middleware('isuservalid:admin,reader');
+
+Route::get('dashboard/inner', [UserController::class, 'innerPage'])
+    ->name('inner')
+    ->middleware(['isuservalid:admin',TestUser::class]);

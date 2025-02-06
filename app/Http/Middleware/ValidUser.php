@@ -16,16 +16,31 @@ class ValidUser //name change here
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        echo "<h3 class='text-primary'>We are now in ValidUser Middleware.</h3>";
-        if(Auth::check()){
-            return $next($request);
+        $user = Auth::user();
 
-        }else{
-            return redirect()->route('login');
+        echo "<h3 class='text-primary'>We are now in ValidUser Middleware.</h3>";
+        echo "<h3 class='text-primary'>".$user->role."</h3>";
+
+        // for singel
+        // if(Auth::check() && Auth::user()->role == $role){
+        //     return $next($request);
+
+        // }else{
+        //     return redirect()->route('login');
+        // }
+
+    //   for multiple 
+        if ($user && in_array($user->role, $roles)) {
+
+            return $next($request); // Allow request to proceed
         }
+        // return redirect()->route('login');
+        return redirect()->route('login')->with('error', 'Access Denied');
     }
+
+
 // after complete the request then its run
     // public function terminate(Request $request, Response $response): Void
     // {
